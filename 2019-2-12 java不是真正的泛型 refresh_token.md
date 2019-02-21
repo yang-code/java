@@ -1,5 +1,5 @@
 ---
-title: 2019-2-12 java不是真正的泛型 refresh_token  
+title: 2019-2-12 java不是真正的泛型  
 tags: java 泛型
 grammar_cjkRuby: true
 ---
@@ -37,6 +37,7 @@ public static void main(String[] args) throws Exception {
         System.out.println(list.get(1)); //a
     }
 ```
+
 这里面就证明了虽然List声明为只能装Integer类型，但是我却放进去了字符串类型，由此课件，泛型是“假”的，只存在于编译期。再看一个例子：
 ```java?linenums
 public static void main(String[] args) throws Exception {
