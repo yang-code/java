@@ -24,7 +24,7 @@ grammar_cjkRuby: true
 
 其实Java为了向下兼容，提出来的泛型只是一个语法糖，并不是像c++那样是真的泛型。下面我通过两个简单的例子，可以让大家感受一下：
 
-```java
+```java?linenums
 public static void main(String[] args) throws Exception {
         List<Integer> list = new ArrayList<>();
         list.add(1);
@@ -33,20 +33,18 @@ public static void main(String[] args) throws Exception {
         //下面通过java的反射，绕过泛型  来给添加字符串
         Method add = list.getClass().getMethod("add", Object.class);
         add.invoke(list,"a");
-
         System.out.println(list); //[1, a] 输出没有没问题
         System.out.println(list.get(1)); //a
     }
 ```
 这里面就证明了虽然List声明为只能装Integer类型，但是我却放进去了字符串类型，由此课件，泛型是“假”的，只存在于编译期。再看一个例子：
-```java
+```java?linenums
 public static void main(String[] args) throws Exception {
         Map<String, String> map = new HashMap<>();
         String key = "key";
         Integer val = new Integer(1); //备注：此方法在Java9后标注为过期了，建议使用valueOf，使用缓存来提高效率
         Method m = HashMap.class.getDeclaredMethod("put", new Class[]{Object.class, Object.class});
         m.invoke(map, key, val);
-
         System.out.println(map); //{key=1}
         //但是下面的输出会报错
         System.out.println(map.get(key)); // java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
